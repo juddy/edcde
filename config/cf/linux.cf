@@ -1,0 +1,290 @@
+XCOMM platform:  $TOG: linux.cf /main/47 1998/04/17 11:32:51 mgreess $
+
+#ifndef OSName
+# define OSName			DefaultOSName
+#endif
+#ifndef OSMajorVersion
+# define OSMajorVersion		DefaultOSMajorVersion
+#endif
+#ifndef OSMinorVersion
+# define OSMinorVersion		DefaultOSMinorVersion
+#endif
+#ifndef OSTeenyVersion
+# define OSTeenyVersion		DefaultOSTeenyVersion
+#endif
+
+#ifndef LinuxDistribution 
+#define LinuxDistribution	DefaultLinuxDistribution
+/*
+  Add "#define LinuxDistribution Linux<mumble>" to your site.def or host.def.
+  Currently only LinuxSuSE will be figured out automatically.
+  Valid values are (from the list at www.linux.org in Oct. 1997):
+    LinuxUnknown    (0)
+    LinuxSuSE       (1)
+    LinuxCaldera    (2)
+    LinuxCraftworks (3)
+    LinuxDebian     (4)
+    LinuxInfoMagic  (5)
+    LinuxKheops     (6)
+    LinuxPro        (7)
+    LinuxRedHat     (8)
+    LinuxSlackware  (9)
+    LinuxTurbo      (10)
+    LinuxWare       (11)
+    LinuxYggdrasil  (12)
+*/
+#endif
+
+#ifndef DefaultLinuxCLibMajorVersion
+# define DefaultLinuxCLibMajorVersion    6
+#endif
+#ifndef DefaultLinuxCLibMinorVersion
+# define DefaultLinuxCLibMinorVersion    0
+#endif
+#ifndef DefaultLinuxCLibTeenyVersion
+# define DefaultLinuxCLibTeenyVersion    0
+#endif
+
+#ifndef LinuxCLibMajorVersion
+# define LinuxCLibMajorVersion           DefaultLinuxCLibMajorVersion
+#endif
+#ifndef LinuxCLibMinorVersion
+# define LinuxCLibMinorVersion           DefaultLinuxCLibMinorVersion
+#endif
+#ifndef LinuxCLibTeenyVersion
+# define LinuxCLibTeenyVersion           DefaultLinuxCLibTeenyVersion
+#endif
+
+#ifndef LinuxBinUtilsMajorVersion
+# define LinuxBinUtilsMajorVersion	 DefaultLinuxBinUtilsMajorVersion
+#endif
+
+XCOMM operating system:  OSName (OSMajorVersion./**/OSMinorVersion./**/OSTeenyVersion)
+XCOMM libc:  (LinuxCLibMajorVersion./**/LinuxCLibMinorVersion./**/LinuxCLibTeenyVersion)
+XCOMM binutils:  (LinuxBinUtilsMajorVersion)
+
+#ifndef UseElfFormat
+# if OSMajorVersion > 1 || (OSMajorVersion == 1 && OSMinorVersion > 1)
+#  define UseElfFormat		YES
+# else
+#  define UseElfFormat		NO
+#  error "Only ELF format is supported on linux"
+# endif
+#endif
+
+#define UseInstalledX11         YES
+
+#define BuildLibPathVar   	LD_LIBRARY_PATH
+#define HasGcc			YES
+#define HasGcc2			YES
+#define HasGcc2ForCplusplus	YES
+#define GccUsesGas		YES
+#define UseGas			YES
+#define GnuCpp			YES
+#define HasShadowPasswd		YES
+#define HasPutenv		YES
+#define HasShm			YES
+#define HasSockets		YES
+
+#define HasMakefileSafeInclude  YES
+#define DependFileName          .depend
+#define DependCmd               $(CC) -E -MM -MG
+
+#ifdef IncludeMakefile
+# undef IncludeMakefile
+#endif
+
+#define IncludeMakefile(file)   -include file
+
+#if (LinuxDistribution == LinuxRedHat)
+# define HasZlib		YES
+#endif
+
+#define AvoidNullMakeCommand	YES
+#define StripInstalledPrograms	YES
+#define CompressAllFonts	YES
+#define Malloc0ReturnsNull	YES
+#define NeedConstPrototypes	YES
+#define NeedFunctionPrototypes	YES
+#define NeedNestedPrototypes	YES
+#define NeedVarargsPrototypes	YES
+#define NeedWidePrototypes	NO
+#define SetTtyGroup		YES
+
+#define CcCmd			gcc -g -pipe
+#define CplusplusCmd		g++ -g -pipe -fpermissive
+#define AsCmd			as
+#define LdCmd			ld
+
+#define CplusplusLibC           -lstdc++
+#define AsmDefines		-D__ELF__
+
+#define MkdirHierCmd		mkdir -p
+#define CppCmd			/lib/cpp
+#if OSMajorVersion >= 2
+# define YaccCmd                yacc
+#else
+# define YaccCmd                bison -y
+#endif
+#define LexCmd			flex -l
+#define LexLib			-lfl
+#define PreProcessCmd		CcCmd -E
+#define PostIncDir		DefaultGccIncludeDir
+#define LdCombineFlags		-r
+#define XawI18nDefines		-DUSE_XWCHAR_STRING -DUSE_XMBTOWC
+#define HasWChar32		YES
+#define StandardCppDefines	-traditional -nostdinc StandardDefines
+#define ExtensionOSDefines	-DXTESTEXT1
+
+#define LinuxLocaleDefines	/**/
+
+#define DefaultCCOptions        -ansi
+
+XCOMM If you have the tirpc library on your system, and you have the
+XCOMM libtirpc-dev installed, then define HasTIRPCLib to YES in either
+XCOMM your host.def or site.def file.  Using the tirpc lib should
+XCOMM allow running rpcbind in secure mode (ie: without the -i option).
+XCOMM The default is NO.
+
+#ifndef HasTIRPCLib
+# define HasTIRPCLib NO
+#endif
+
+#if HasTIRPCLib
+TIRPCLIB = -ltirpc
+#else
+TIRPCLIB = 
+#endif
+
+#if !defined(DefaultGcc2i386Opt)
+# define DefaultGcc2i386Opt -O2 -fno-strict-aliasing -Wno-write-strings
+#endif
+
+#if LinuxCLibMajorVersion < 6
+# define LinuxSourceDefines	-D_POSIX_SOURCE -D_DEFAULT_SOURCE \
+				-D_BSD_SOURCE -D_SVID_SOURCE LinuxLocaleDefines
+# ifndef HasLibCrypt
+#  define HasLibCrypt		NO
+# endif
+
+#else
+# define LinuxSourceDefines	-D_POSIX_SOURCE -D_DEFAULT_SOURCE \
+				-D_BSD_SOURCE -D_SVID_SOURCE \
+				-D__NO_STRING_INLINES -D__NO_MATH_INLINES \
+				LinuxLocaleDefines
+# define HasPosixThreads	YES
+# define ThreadedX		YES
+# define HasThreadSafeAPI	YES
+# define ThreadsLibraries	-lpthread
+# define SystemMTDefines	-D_REENTRANT
+# ifndef HasLibCrypt
+#  define HasLibCrypt		YES
+# endif
+#endif
+
+#ifdef SparcArchitecture
+# define LinuxMachineDefines -Dsparc
+
+# if UseElfFormat
+#  define HasPlugin             YES
+#  define VendorHasX11R6_3libXext YES     /* XC or XFree86 3.3.1 */
+# endif
+#endif /* SparcArchitecture */
+
+#ifdef ARMArchitecture
+# ifndef OptimizedCDebugFlags
+#  define OptimizedCDebugFlags	DefaultGcc2i386Opt
+# endif
+# define LinuxMachineDefines -D__arm__
+# define LSBBitOrder             YES
+
+# if UseElfFormat
+#  define HasPlugin              YES
+#  define VendorHasX11R6_3libXext YES     /* XC or XFree86 3.3.1 */
+# endif 
+#endif /* ARMArchitecture */
+
+#ifdef i386Architecture
+# ifndef OptimizedCDebugFlags
+#  define OptimizedCDebugFlags	DefaultGcc2i386Opt
+# endif
+# define LinuxMachineDefines	-D__i386__
+/* For DtHelp TIFF processing routines. */
+# define LSBBitOrder             YES
+
+# if UseElfFormat
+#  define HasPlugin		YES
+#  define VendorHasX11R6_3libXext	YES	/* XC or XFree86 3.3.1 */
+# endif
+#endif /* i386Architecture */
+
+#ifdef AMD64Architecture
+# ifndef OptimizedCDebugFlags
+#  define OptimizedCDebugFlags	DefaultGcc2i386Opt
+# endif
+# define LinuxMachineDefines	-D__x86_64__ 
+/* For DtHelp TIFF processing routines. */
+# define LSBBitOrder            YES
+
+# if UseElfFormat
+#  define HasPlugin		YES
+#  define VendorHasX11R6_3libXext	YES	/* XC or XFree86 3.3.1 */
+# endif
+#endif /* AMD64Architecture */
+
+#ifdef PpcArchitecture
+# ifndef OptimizedCDebugFlags
+#  define OptimizedCDebugFlags    DefaultGcc2i386Opt
+# endif
+# define LinuxMachineDefines     -D__powerpc__
+#endif /* PpcArchitecture */
+
+#ifdef AlphaArchitecture
+# ifndef OptimizedCDebugFlags
+#  define OptimizedCDebugFlags	DefaultGcc2i386Opt
+# endif
+# define LinuxMachineDefines	-D__alpha__
+#endif /* AlphaArchitecture */
+
+#ifdef Mc68020Architecture
+# ifndef OptimizedCDebugFlags
+#  define OptimizedCDebugFlags	DefaultGcc2i386Opt
+# endif
+# define LinuxMachineDefines	-D__mc68000__
+# define StandardCppDefines      -traditional 
+#endif /* Mc68020Architecture */
+
+#define StandardDefines		-Dlinux LinuxMachineDefines LinuxSourceDefines
+
+#define ConnectionFlags		-DUNIXCONN -DTCPCONN
+
+XCOMM This is needed for CDE currently
+#define CplusplusStandardDefines StandardDefines 
+
+/* Some of these man page defaults are overriden in the above OS sections */
+#ifndef ManSuffix
+# define ManSuffix	1x
+#endif
+#ifndef ManDir
+# define ManDir		$(MANSOURCEPATH)1
+#endif
+#ifndef LibManSuffix
+# define LibManSuffix	3x
+#endif
+#ifndef LibmanDir
+# define LibmanDir	$(MANSOURCEPATH)3
+#endif
+#ifndef FileManSuffix
+# define FileManSuffix	5x
+#endif
+#ifndef FileManDir
+# define FileManDir	$(MANSOURCEPATH)5
+#endif
+
+#define ArchitectureDefines	-DLINUX_ARCHITECTURE
+
+#define TtClientLibs $(TTLIB) $(TIRPCLIB) $(XTOOLLIB) $(XLIB)
+#define TtClientDepLibs $(DEPTTLIB) $(DEPXTOOLLIB) $(DEPXLIB)
+
+#include <lnxDep.rules>
+#include <lnxLib.rules>

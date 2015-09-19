@@ -1,0 +1,26 @@
+HandleOption()
+{
+  while [ $# -ne 0 ]; do
+    case $1 in
+        -e) OPERATION="configure"
+	    shift;
+            ;;
+	-d) OPERATION="deconfigure"
+	    shift;
+	    ;;
+	-v) OPERATION="verify"
+	    shift;
+	    ;;
+	-s) OPERATION="size"
+	    shift;
+	    ;;
+	-h | --help | --usage) OPERATION="usage"
+	    shift;
+	    ;;
+	*) OPERATION="usage"
+	    shift;
+	    ;;
+    esac
+  done
+}
+

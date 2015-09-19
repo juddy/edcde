@@ -1,0 +1,24 @@
+XCOMM
+XCOMM  Generate XmPrivate.h containing ANSI C 
+XCOMM  function prototypes extracted from the private
+XCOMM  include headers files 
+XCOMM  
+XCOMM  libXm source from Motif (lib/Xm subdirectory)
+XCOMM  needs to be available in ../../imports/motif/lib/Xm
+XCOMM
+
+HEADERS = XmPrivate.h
+ALLHEADERS = *.h
+
+BuildIncludes($(HEADERS),Xm,..)
+
+XCOMM XmPrivate must be generated manually.  For this you work, you must have
+XCOMM a freshly compiled openmotif tree, and MLIBSRC must be pointing to it.
+
+XmPrivate.h: 
+	awk -f extractprototype.awk $(MLIBSRC)/Xm/$(ALLHEADERS) > $@ || rm -f $@
+
+depend::
+
+clean::
+

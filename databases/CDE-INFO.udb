@@ -1,0 +1,346 @@
+# $TOG: CDE-INFO.udb /main/15 1997/06/13 08:31:08 samborn $
+#>>------------------------------
+# CDE-INFO.udb   universal database for dtinfo Public DTD and SGML data
+#--------------------------------
+#
+#>>------------------------------
+# Defaults for: hpux
+#<<------------------------------
+#
+{ hpux : defaults
+	install_target = 
+	fileset = CDE-RUN
+	type = file
+	status = di----
+	processor = 378
+	mode = 0444
+	owner = bin
+	group = bin
+	link_source = <LNK>
+	build_target = /
+	install_rule_name = 
+	install_flags = 
+	a_out_location = <SRC>
+	order = 0
+	responsible_project = cde_dt
+}
+#
+#>>------------------------------
+# Defaults for: hpux 10.0
+#<<------------------------------
+#
+{ hpV4 : defaults
+	install_target = 
+	fileset = CDE-RUN
+	type = file
+	status = di----
+	processor = 378
+	mode = 0444
+	owner = bin
+	group = bin
+	link_source = <LNK>
+	build_target = /
+	install_rule_name = 
+	install_flags = 
+	a_out_location = <SRC>
+	order = 0
+	responsible_project = cde_dt
+}
+#
+#>>------------------------------
+# Defaults for: aix
+#<<------------------------------
+#
+{ aix : defaults
+	install_target = 
+	fileset = CDE-RUN
+	type = file
+	status = di----
+	processor = 378
+	mode = 0444
+	owner = bin
+	group = bin
+	link_source = <LNK>
+	build_target = /
+	install_rule_name = 
+	install_flags = 
+	a_out_location = <SRC>
+	order = 0
+	responsible_project = cde_dt
+}
+#
+#>>------------------------------
+# Defaults for: sun
+#<<------------------------------
+#
+{ sun : defaults
+        install_target =
+        fileset = CDE-RUN
+        type = file
+        status = di----
+        processor = 378
+        mode = 0444
+        owner = bin
+        group = bin
+        link_source = <LNK>
+        build_target = /
+        install_rule_name =
+        install_flags =
+        a_out_location = <SRC>
+        order = 0
+        responsible_project = cde_dt
+}
+#
+#>>------------------------------
+# Defaults for: Digital
+#<<------------------------------
+#
+{ dec : defaults
+	install_target = 
+	fileset = CDE-RUN
+	type = file
+	status = di----
+	processor = 378
+	mode = 0444
+	owner = bin
+	group = bin
+	link_source = <LNK>
+	build_target = /
+	install_rule_name = 
+	install_flags = 
+	a_out_location = <SRC>
+	order = 0
+	responsible_project = cde_dt
+}
+#
+#>>------------------------------
+# Defaults for: standalone product
+#<<------------------------------
+#
+{ standalone : defaults
+	install_target = 
+	fileset = CDE-RUN
+	type = file
+	status = di----
+	processor = 378
+	mode = 0444
+	owner = bin
+	group = bin
+	link_source = <LNK>
+	build_target = /
+	install_rule_name = 
+	install_flags = 
+	a_out_location = <SRC>
+	order = 0
+	responsible_project = cde_dt
+}
+#
+#>>-------------------------------------------------
+# Defaults for: everything else (identical to hpux)
+#<<-------------------------------------------------
+#
+{ default : defaults
+	install_target = 
+	fileset = CDE-RUN
+	type = file
+	status = di----
+	processor = 378
+	mode = 0444
+	owner = bin
+	group = bin
+	link_source = <LNK>
+	build_target = /
+	install_rule_name = 
+	install_flags = 
+	a_out_location = <SRC>
+	order = 0
+	responsible_project = cde_dt
+}
+#
+#>>----------------------------- 
+# SGML files
+#<<----------------------------- 
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/dtinfo.af
+{ default
+	install_target = /usr/dt/infolib/C/SGML/dtinfo.af
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/dtinfo.decl
+{ default
+	install_target = /usr/dt/infolib/C/SGML/dtinfo.decl
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/dtinfoBook.dtd
+{ default
+	install_target = /usr/dt/infolib/C/SGML/dtinfoBook.dtd
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/dtinfoTOC.dtd
+{ default
+	install_target = /usr/dt/infolib/C/SGML/dtinfoTOC.dtd
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/dtinfoStyle.dtd
+{ default
+	install_target = /usr/dt/infolib/C/SGML/dtinfoStyle.dtd
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/docbook.dtd
+{ default
+	install_target = /usr/dt/infolib/C/SGML/docbook.dtd
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/catalog
+{ default
+	install_target = /usr/dt/infolib/C/SGML/catalog
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-catalog
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-catalog
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/proxy.ss
+{ default
+	install_target = /usr/dt/infolib/C/SGML/proxy.ss
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-amsa.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-amsa.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-amsb.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-amsb.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-amsc.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-amsc.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-amsn.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-amsn.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-amso.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-amso.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-amsr.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-amsr.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-box.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-box.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-cyr1.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-cyr1.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-cyr2.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-cyr2.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-dia.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-dia.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-grk1.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-grk1.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-grk2.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-grk2.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-grk3.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-grk3.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-grk4.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-grk4.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-lat1.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-lat1.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-lat2.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-lat2.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-mfrk.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-mfrk.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-mopf.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-mopf.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-mscr.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-mscr.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-num.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-num.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-pub.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-pub.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/iso-tech.gml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/iso-tech.gml
+}
+#
+programs/dtinfo/dtinfogen/infolib/C/SGML/styprolog.sgml
+{ default
+	install_target = /usr/dt/infolib/C/SGML/styprolog.sgml
+}
+#
+#>>----------------------------- 
+# dtinfo spec files
+#<<----------------------------- 
+#
+programs/dtinfo/dtinfo/install/lib/mmdb.mark.spec
+{ default
+	install_target = /usr/dt/infolib/etc/mmdb.mark.spec
+}
+#
+lib/DtMmdb/oliasdb/mmdb.infolib.spec
+{ default
+	install_target = /usr/dt/infolib/etc/mmdb.infolib.spec
+}
+#
+lib/DtMmdb/StyleSheet/hardcopy.feature.spec
+{ default
+	install_target = /usr/dt/infolib/etc/hardcopy.feature.spec
+}
+#
+lib/DtMmdb/StyleSheet/online.feature.spec
+{ default
+	install_target = /usr/dt/infolib/etc/online.feature.spec
+}

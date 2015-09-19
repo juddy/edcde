@@ -1,0 +1,17 @@
+XCOMM $TOG: Imakefile /main/5 1998/08/10 15:51:11 mgreess $
+
+#define IHaveSubdirs
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)' 'CXXDEBUGFLAGS=$(CXXDEBUGFLAGS)'
+
+SUBDIRS = dtinfo_start
+
+XCOMM redefine TopLevelProject to build DtInfo with standard CDE config dir
+#undef  TopLevelProject
+#define TopLevelProject		DtInfo
+IMAKE_DEF_DTINFO =  -DTopLevelProject=TopLevelProject \
+		    -DProjectTmplFile='<DtInfo.tmpl>' \
+		    -DProjectRulesFile='<DtInfo.rules>'
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+

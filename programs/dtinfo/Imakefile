@@ -1,0 +1,37 @@
+XCOMM $TOG: Imakefile /main/11 1998/08/10 15:51:35 mgreess $
+/*
+ * (c) Copyright 1996 Digital Equipment Corporation.
+ * (c) Copyright 1996 Hewlett-Packard Company.
+ * (c) Copyright 1996 International Business Machines Corp.
+ * (c) Copyright 1996 Sun Microsystems, Inc.
+ * (c) Copyright 1996 Novell, Inc. 
+ * (c) Copyright 1996 FUJITSU LIMITED.
+ * (c) Copyright 1996 Hitachi.
+ */
+
+#define IHaveSubdirs
+XCOMM make sure this is defined in any case
+#ifndef PassCDebugFlags
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)' 'CXXDEBUGFLAGS=$(CXXDEBUGFLAGS)'
+#endif
+
+XCOMM DtMmdb eventually should be made via lib,
+XCOMM but as long as we use a local config dir it's not.
+PRE_REQ_SUBDIRS = tools DtMmdb mmdb
+BROWSER_SUBDIRS = dtinfo
+TOOLKIT_SUBDIRS = dtinfogen
+INDEPENDENT_SUBDIRS = clients
+
+SUBDIRS = $(PRE_REQ_SUBDIRS) $(BROWSER_SUBDIRS) $(TOOLKIT_SUBDIRS) $(INDEPENDENT_SUBDIRS)
+
+XCOMM redefine TopLevelProject to build DtInfo with standard CDE config dir
+IMAKE_DEF_DTINFO =  -DTopLevelProject=TopLevelProject \
+		    -DProjectTmplFile='<DtInfo.tmpl>' \
+		    -DProjectRulesFile='<DtInfo.rules>'
+
+XCOMM Variables to switch on debug mode temporarily
+XCOMM CDEBUGFLAGS = -g -DDEBUG
+XCOMM CXXDEBUGFLAGS = -g -DDEBUG
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
