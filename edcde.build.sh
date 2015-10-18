@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+if [ ! -f /etc/debian_release ]
+then
+	echo "Oops, $0 only runs on Debian/Ubuntu systems, or systems with dpkg and apt available"
+	exit 1
+fi
 #Checking for and installing missing prerequisites
 
 #git
@@ -107,13 +113,11 @@ prereq=$(dpkg -s libmotif-dev|grep installed)
 
 echo "OpenMotif and OpenMotif Development libraries installed..."
 
-#Clone git master in to ./code/cde
+#Pull from github
 
-sudo rm -rf ./code/
-git clone git://git.code.sf.net/p/cdesktopenv/code
+git pull
 
 #Link X11 headers
-cd code/cde
 mkdir -p imports/x11/include
 cd imports/x11/include
 ln -s /usr/include/X11 .
@@ -121,23 +125,23 @@ cd ../../..
 
 #Build...Make World (or World.dev/World.doc)
 
-make World.dev
-
+make World
 
 #Install CDE to /usr/dt
-#uncomment this section to backup an existing install (if it exists)
-#and install the build just built. This will reset customizations if
-#made to things like Dtlogo.pm or the default backdrops.
 
-#sudo mkdir /etc/dt/backups
-#sudo tar czmf /etc/dt/backups/CDEbian-$(date +%m%d%y).tar.gz /usr/dt
-#sudo rm -rf /usr/dt
+make install
 
-#cd admin/IntegTools/dbTools
-#sudo ./installCDE -s ../../..
-#cd ../post_install/linux
-#sudo ./configRun -e
-#sudo mkdir -p /var/dt
-#sudo chmod -R a+rwx /var/dt
-#sudo mkdir -p /usr/spool/calendar
+# Add palettes
+
+echo "Installing palettes"
+
+cp -aR programs/palettes /usr/dt
+
+cd admin/IntegTools/dbTools
+sudo ./installCDE -s ../../..
+cd ../post_install/linux
+sudo ./configRun -e
+sudo mkdir -p /var/dt
+sudo chmod -R a+rwx /var/dt
+sudo mkdir -p /usr/spool/calendar
 
