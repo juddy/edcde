@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [ ! -f /etc/debian_release ]
+if [ ! -f /etc/debian_version ]
 then
 	echo "Oops, $0 only runs on Debian/Ubuntu systems, or systems with dpkg and apt available"
 	exit 1
